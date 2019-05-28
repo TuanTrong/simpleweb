@@ -1,0 +1,9 @@
+sudo: required
+services:
+  - docker
+before_install:
+  - docker build -t tuannthnvn/simpleweb -f Dockerfile.dev .
+
+script:
+  #-- --coverage to exit after run test successfully.
+  - docker run tuannthnvn/simpleweb npm run test -- --coverage
