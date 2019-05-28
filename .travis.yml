@@ -7,3 +7,17 @@ before_install:
 script:
   #-- --coverage to exit after run test successfully.
   - docker run tuannthnvn/simpleweb npm run test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-1"
+  app: "simpleweb"
+  env:  "Simpleweb-env"
+  #travis will zip and copy code to this S3 (hard driver on AWS)
+  bucket_name: "elasticbeanstalk-us-east-1-375600926961"
+  bucket_path: "simpleweb"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_SECRET_ACCESS_KEY"
